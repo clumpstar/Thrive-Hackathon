@@ -1,10 +1,13 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { FaTrashAlt, FaArrowRight } from 'react-icons/fa'; // Import FontAwesome icons
 
 
 const section1 = () => {
+
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     lastName: '',
@@ -188,7 +191,7 @@ const section1 = () => {
 
     // Check email format
     const isValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email);
-    setIsValidEmail(isValid);
+    setEmailValid(isValid);
     if (!isValid) {
       setFormData(prevFormData => ({ ...prevFormData, email: '' }));
       alert("Email is not in the expected format!");
@@ -200,8 +203,7 @@ const section1 = () => {
     localStorage.setItem('mailData', JSON.stringify(mailData));
     localStorage.setItem('residenceData', JSON.stringify(residenceData));
 
-    // Move to the next section
-    // Implement your logic to navigate to the next section here
+    router.push("/section2/section2C1")
   };
 
 
@@ -454,10 +456,10 @@ const section1 = () => {
                   </a>
                 </div>
                 <div className='text-center'>
-                  <Link href="\section2\section2C1" onSubmit={handleSubmit} className='border p-2 hover:bg-slate-400 text-black transition-all ease-in cursor-pointer rounded-md'>
+                  <button type='submit' className='border p-2 hover:bg-slate-400 text-black transition-all ease-in cursor-pointer rounded-md'>
                     <span className="hidden sm:inline-block">Next Section <FaArrowRight className="inline-block ml-1" /></span>
                     <span className="sm:hidden"><FaArrowRight className="inline-block ml-1" /></span>
-                  </Link>
+                  </button>
                 </div>
               </div>
 

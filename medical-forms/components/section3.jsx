@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { FaTrashAlt, FaArrowRight } from 'react-icons/fa'; // Import FontAwesome icons
 
 const Section3 = () => {
+    const router = useRouter();
+
     const [formData, setFormData] = useState({
         agreeToCommitment: false,
         agreeToReleaseInfo: false,
@@ -20,7 +22,7 @@ const Section3 = () => {
 
     useEffect(() => {
         // Fill data from localStorage if present
-        const storedFormData = JSON.parse(localStorage.getItem('formData')) || {};
+        const storedFormData = JSON.parse(localStorage.getItem('formDatasection3')) || {};
         setFormData(storedFormData);
         const storedImageSrc = localStorage.getItem('imageSrc');
         setImageSrc(storedImageSrc);
@@ -77,7 +79,7 @@ const Section3 = () => {
             workTelephone: ''
         });
         setImageSrc('');
-        localStorage.removeItem('formData');
+        localStorage.removeItem('formDatasection3');
         localStorage.removeItem('imageSrc');
     }
 
@@ -97,7 +99,7 @@ const Section3 = () => {
         }
 
         // Store form data in localStorage
-        localStorage.setItem('formData', JSON.stringify(formData));
+        localStorage.setItem('formDatasection3', JSON.stringify(formData));
 
         // Check area code and number format for home telephone
         if (!isValidPhoneNumber(formData.homeTelephone)) {
@@ -111,7 +113,7 @@ const Section3 = () => {
             return;
         }
 
-        Router.push("/section4");
+        router.push("/section4");
     };
 
     const isValidPhoneNumber = (phoneNumber) => {

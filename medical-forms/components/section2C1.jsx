@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import React from 'react';
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { FaTrashAlt, FaArrowRight } from 'react-icons/fa'; // Import FontAwesome icons
 
 
 const section2C1 = () => {
+
+  const router = useRouter();
 
   const [formDataC1, setFormDataC1] = useState({
     lastName: '',
@@ -229,12 +232,7 @@ const section2C1 = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const isValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email);
-    setIsValidEmail(isValid);
-    if (!isValid) {
-      formData.email = ''
-      alert("Email is not in expected format!")
-    }
+    router.push("/section3")
 
   }
 
@@ -495,10 +493,10 @@ const section2C1 = () => {
                   </a>
                 </div>
                 <div className='text-center'>
-                  <Link href="\section3" className='border p-2 hover:bg-slate-400 text-black transition-all ease-in cursor-pointer rounded-md'>
+                  <button type='submit' className='border p-2 hover:bg-slate-400 text-black transition-all ease-in cursor-pointer rounded-md'>
                     <span className="hidden sm:inline-block">Next Section <FaArrowRight className="inline-block ml-1" /></span>
                     <span className="sm:hidden"><FaArrowRight className="inline-block ml-1" /></span>
-                  </Link>
+                  </button>
                 </div>
               </div>
 
