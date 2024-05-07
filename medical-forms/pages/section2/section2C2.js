@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import Section2 from "@/components/section2"
+import Section2C2 from "@/components/section2C2"
 import Navbar from '@/components/navbar'
 import Link from "next/link";
 
-export class section2 extends Component {
+export class section2C1 extends Component {
   render() {
     return (
       <main className="bg-neutral-50 min-h-screen">
@@ -14,12 +14,20 @@ export class section2 extends Component {
         <div>
           <Navbar />
         </div>
+        <div className='flex flex-row gap-4 mt-4 mx-24'>
+            <div className='text-black font-semibold border rounded-lg px-3 hover:scale-110 transition-all ease-out'>
+                <Link href="/section2/section2C1">Child 1</Link>
+            </div>
+            <div className='bg-black text-white font-semibold border rounded-lg px-3'>
+                Child 2
+            </div>
+        </div>
         <div>
-          <Section2 />
+          <Section2C2 />
         </div>
       </main>
     )
   }
 }
 
-export default section2
+export default section2C1

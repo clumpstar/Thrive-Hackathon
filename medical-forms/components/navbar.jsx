@@ -13,7 +13,7 @@ const navbar = () => {
       <div className="container flex flex-row justify-center items-center">
         <div className="hidden lg:flex space-x-16">
           <Link href="/section1" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 1</Link>
-          <Link href="/section2" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 2</Link>
+          <Link href="/section2/section2C1" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 2</Link>
           <Link href="/section3" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 3</Link>
           <Link href="/section4" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 4</Link>
         </div>
@@ -27,10 +27,10 @@ const navbar = () => {
       </div>
       {isOpen && (
         <div className="lg:hidden mt-4">
-          <a href="#section-1" className="block py-2 px-4 font-semibold cursor-pointer hover:scale-110 ease-out transition-all">Section 1</a>
-          <a href="#section-2" className="block py-2 px-4 font-semibold cursor-pointer hover:scale-110 ease-out transition-all">Section 2</a>
-          <a href="#section-3" className="block py-2 px-4 font-semibold cursor-pointer hover:scale-110 ease-out transition-all">Section 3</a>
-          <a href="#section-4" className="block py-2 px-4 font-semibold cursor-pointer hover:scale-110 ease-out transition-all">Section 4</a>
+          <Link href="/section1" className='block py-2 px-4 font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 1</Link>
+          <Link href="/section2/section2C1" className='block py-2 px-4 font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 2</Link>
+          <Link href="/section3" className='block py-2 px-4 font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 3</Link>
+          <Link href="/section4" className='block py-2 px-4 font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 4</Link>
         </div>
       )}
     </nav>
