@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 
 const navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,10 +12,10 @@ const navbar = () => {
     <nav className="bg-orange-300 text-white p-4 rounded-3xl mx-24">
       <div className="container flex flex-row justify-center items-center">
         <div className="hidden lg:flex space-x-16">
-          <a href="#section-1" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 1</a>
-          <a href="#section-2" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 2</a>
-          <a href="#section-3" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 3</a>
-          <a href="#section-4" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 4</a>
+          <Link href="/section1" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 1</Link>
+          <Link href="/section2" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 2</Link>
+          <Link href="/section3" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 3</Link>
+          <Link href="/section4" className='font-semibold cursor-pointer hover:scale-110 ease-out transition-all'>Section 4</Link>
         </div>
         <div className="lg:hidden">
           <button onClick={toggleMenu}>
