@@ -19,6 +19,8 @@ const section4 = () => {
 
     const insertDatabase = async () => {
 
+        console.log("Came to store the data")
+
         //Data from section1
         const storedFormDataSection1 = JSON.parse(localStorage.getItem('formData'));
 
@@ -255,6 +257,7 @@ const section4 = () => {
             console.log('section3: Email already exists');
         }
 
+        
 
         // Check if the email already exists
         const { data: existingDataSection4, error: existingErrorSection4 } = await supabase
@@ -301,7 +304,7 @@ const section4 = () => {
     };
 
     const handleGeneratePDF = async (e) => {
-        { insertDatabase }
+        await insertDatabase();
 
         const storedFormDataSection1 = JSON.parse(localStorage.getItem('formData'));
         const storedMailDataSection1 = JSON.parse(localStorage.getItem('mailData'));
@@ -318,8 +321,7 @@ const section4 = () => {
         const storedFormDatasection3 = JSON.parse(localStorage.getItem('formDatasection3')) || {};
 
         const storedDoctor = localStorage.getItem('selectedDoctor');
-
-
+        
         const doc = new jsPDF();
 
         doc.setFontSize(18)

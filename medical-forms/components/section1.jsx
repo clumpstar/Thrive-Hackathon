@@ -9,6 +9,7 @@ const section1 = () => {
 
   const router = useRouter();
 
+  //Used for holding the states of the basic info in section1
   const [formData, setFormData] = useState({
     lastName: '',
     firstName: '',
@@ -18,7 +19,7 @@ const section1 = () => {
     healthNumber: '',
     email: ''
   });
-
+  //used for holding the states
   const [mailData, setMailData] = useState({
     addressLine1: '',
     addressLine2: '',
