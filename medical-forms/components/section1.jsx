@@ -19,7 +19,7 @@ const section1 = () => {
     healthNumber: '',
     email: ''
   });
-  //used for holding the states
+  //used for holding the states of the Mailing address part
   const [mailData, setMailData] = useState({
     addressLine1: '',
     addressLine2: '',
@@ -27,7 +27,7 @@ const section1 = () => {
     landmark: '',
     postalCode: ''
   })
-
+  //used for holding the states of the Residence address part
   const [residenceData, setResidenceData] = useState({
     addressLine1R: '',
     addressLine2R: '',
@@ -36,9 +36,10 @@ const section1 = () => {
     postalCodeR: ''
   })
 
+  //Used to check if the email is valid
   const [emailValid, setEmailValid] = useState(true);
 
-  // Load data from localStorage when the component mounts
+  // Load data from localStorage when the component mounts for the ease of use of user
   useEffect(() => {
     const storedFormData = localStorage.getItem('formData');
     if (storedFormData) {
@@ -56,13 +57,15 @@ const section1 = () => {
     }
   }, []);
 
+  //Handles the changes occuring to the formData and stores them in the localstorage
   const handleChange = (e) => {
     const { id, value } = e.target;
     let formattedValue;
     if (id === 'healthNumber') {
+      //allow only numbers with 10 digit
       formattedValue = value.replace(/\D/g, '').slice(0, 10);
     } else if (id === 'lastName' || id === 'firstName' || id === 'middleName') {
-      // For other fields, allow only alphabets and spaces
+      // allow only alphabets and spaces
       formattedValue = value.replace(/[^A-Za-z\s]/g, '').slice(0, 25)
     } else if (id === 'dob' || id === 'sex' || id === 'email') {
       // console.log({id, value})
@@ -80,7 +83,7 @@ const section1 = () => {
       [id]: formattedValue
     }));
   };
-
+  //Handles the changes occuring to the mailData and stores them in the localstorage
   const handleAddressChange = (e) => {
     const { id, value } = e.target;
     let formattedValue;
@@ -100,7 +103,7 @@ const section1 = () => {
       [id]: formattedValue
     }));
   }
-
+  //Handles the changes occuring to the residenceData and stores them in the localstorage
   const handleResidenceAddressChange = (e) => {
     const { id, value } = e.target;
     let formattedValue;
@@ -120,7 +123,7 @@ const section1 = () => {
       [id]: formattedValue
     }));
   }
-
+  //handles the same as mail address checkbox (copies the value from mailData to residenceData when checked else makes it empty)
   const handleCheckboxChange = (e) => {
     const checked = e.target.checked;
 
@@ -186,7 +189,7 @@ const section1 = () => {
     });
   };
 
-
+  //handles teh form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 

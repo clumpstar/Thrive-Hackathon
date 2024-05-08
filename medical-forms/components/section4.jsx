@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import jsPDF from 'jspdf';
+import { useRouter } from 'next/router';
 
 import { createClient } from '@supabase/supabase-js';
 
@@ -15,11 +16,11 @@ const section4 = () => {
 
     const [imageSrc, setImageSrc] = useState("");
 
+    const router = useRouter();
 
 
+    //ALL THE DETAILS OF PREVIOUS SECTIONS WILL BE VALIDATED AND THEN ONLY PROCEED TO STORE IT IN THE SUPABASE POSTGRES DB
     const insertDatabase = async () => {
-
-        console.log("Came to store the data")
 
         //Data from section1
         const storedFormDataSection1 = JSON.parse(localStorage.getItem('formData'));
@@ -28,6 +29,8 @@ const section4 = () => {
             && storedFormDataSection1.healthNumber && storedFormDataSection1.email)
         ) {
             alert("Fill the Section-1 Basic Details properly")
+            router.push("/section1")
+            return;
         }
 
         const storedMailDataSection1 = JSON.parse(localStorage.getItem('mailData'));
@@ -36,6 +39,8 @@ const section4 = () => {
             && storedMailDataSection1.landmark && storedMailDataSection1.postalCode
         )) {
             alert("Fill the Mailing address in Section-1 properly")
+            router.push("/section1")
+            return;
         }
 
         const storedResidenceDataSection1 = JSON.parse(localStorage.getItem('residenceData'));
@@ -44,6 +49,8 @@ const section4 = () => {
             && storedResidenceDataSection1.landmarkR && storedResidenceDataSection1.postalCodeR)
         ) {
             alert("Fill the Residence address in Section-1 properly")
+            router.push("/section1")
+            return;
         }
 
         //Data from section2C1
@@ -77,14 +84,18 @@ const section4 = () => {
             && storedResidenceDataC2.addressLine2R != "" && storedResidenceDataC2.cityR != "" && storedResidenceDataC2.landmarkR != ""
             && storedResidenceDataC2.postalCodeR != "";
 
-        console.log(noFilledC1 && !(partiallyFilledC1))
 
         if (noFilledC1 && !(partiallyFilledC1)) {
             alert("Fill the details for Patient-1 properly in Section 2");
+            router.push("/section2/section2C1")
+            return;
+            
         }
 
         if (noFilledC2 && !(partiallyFilledC2)) {
             alert("Fill the details for Patient-2 properly in Section 2");
+            router.push("/section2/section2C2")
+            return;
         }
 
         //Data from section3
@@ -93,16 +104,22 @@ const section4 = () => {
         if (!(storedFormDatasection3.agreeToCommitment && storedFormDatasection3.agreeToReleaseInfo && storedFormDatasection3.agreeToCancellationConditions
         )) {
             alert("Accept all the terms and Conditions in Section-3")
+            router.push("/section3")
+            return;
         }
 
         if (!(storedFormDatasection3.myself || storedFormDatasection3.children || storedFormDatasection3.dependentAdults)) {
             alert("Check the ones you are signing on behalf of in Section-3")
+            router.push("/section3")
+            return;
         }
 
         const storedImageSrcsection3 = localStorage.getItem('imageSrc');
 
         if (!storedImageSrcsection3) {
             alert("Upload your signature in Section-3")
+            router.push("/section3")
+            return;
         }
 
         //Data from section4
@@ -110,6 +127,8 @@ const section4 = () => {
 
         if (!storedDoctor) {
             alert("choose a Doctor in Section-4")
+            router.push("/section4")
+            return;
         }
 
         // console.log(storedFormDatasection3, storedFormDataSection1.email)
@@ -291,8 +310,6 @@ const section4 = () => {
             setSelectedDoctor(storedDoctor);
         }
 
-
-        // Fetch list of doctors (replace this with your logic to fetch doctors)
         // For demonstration purposes, an array of sample doctors is used here
         const sampleDoctors = ['Dr. Smith', 'Dr. Johnson', 'Dr. Williams'];
         setDoctors(sampleDoctors);
@@ -303,8 +320,15 @@ const section4 = () => {
         localStorage.setItem('selectedDoctor', e.target.value);
     };
 
+
+    //PDF IS GENERATED HERE WITH ALL THE OBTAINED DETAILS
     const handleGeneratePDF = async (e) => {
-        await insertDatabase();
+        try {
+            await insertDatabase();
+        } catch (error) {
+            // Handle the error if an alert was thrown
+            console.error(error); // Log the error for debugging
+        }
 
         const storedFormDataSection1 = JSON.parse(localStorage.getItem('formData'));
         const storedMailDataSection1 = JSON.parse(localStorage.getItem('mailData'));
@@ -492,8 +516,7 @@ const section4 = () => {
         yPos += 10;
         doc.addImage(storedFormDatasection3.signatureImage, 'JPEG', 10, yPos, 50, 50); // Assuming storedFormDatasection3.signatureImage is a base64 image
 
-        // Adjust Y position for "Communication:"
-        yPos += 60; // Adjust vertical position
+        yPos += 60;
         doc.setFont('helvetica', 'bold'); // Set font to bold
         doc.setFontSize(14);
         doc.text("Communication:", 10, yPos);
@@ -543,6 +566,7 @@ const section4 = () => {
             return null;
         }
 
+        //Fetched doctor's signature is used here
         const signatureData = await response.blob();
         const doctorSignatureImageURL = URL.createObjectURL(signatureData);
 

@@ -8,7 +8,7 @@ import { FaTrashAlt, FaArrowRight } from 'react-icons/fa'; // Import FontAwesome
 const section2C1 = () => {
 
   const router = useRouter();
-
+  //Use to hold the states of the patient-1 basic data
   const [formDataC1, setFormDataC1] = useState({
     lastName: '',
     firstName: '',
@@ -18,7 +18,7 @@ const section2C1 = () => {
     healthNumber: '',
     person: ''
   });
-
+  //Use to hold the states of the patient-1 Mailing address data
   const [mailDataC1, setMailDataC1] = useState({
     addressLine1: '',
     addressLine2: '',
@@ -26,7 +26,7 @@ const section2C1 = () => {
     landmark: '',
     postalCode: ''
   })
-
+  //Use to hold the states of the patient-1 Residence address data
   const [residenceDataC1, setResidenceDataC1] = useState({
     addressLine1R: '',
     addressLine2R: '',
@@ -34,8 +34,6 @@ const section2C1 = () => {
     landmarkR: '',
     postalCodeR: ''
   })
-
-  const [emailValid, setEmailValid] = useState(true);
 
   // Load data from localStorage when the component mounts
   useEffect(() => {
@@ -54,17 +52,16 @@ const section2C1 = () => {
       setResidenceDataC1(JSON.parse(storedResidenceData));
     }
   }, []);
-
+  //Handles the changes occuring to the formDataC1 and stores them in the localstorage
   const handleChangeC1 = (e) => {
     const { id, value } = e.target;
     let formattedValue;
     if (id === 'healthNumber') {
       formattedValue = value.replace(/\D/g, '').slice(0, 10);
     } else if (id === 'lastName' || id === 'firstName' || id === 'middleName') {
-      // For other fields, allow only alphabets and spaces
+      //allow only alphabets and spaces
       formattedValue = value.replace(/[^A-Za-z\s]/g, '').slice(0, 25)
     } else if (id === 'dob' || id === 'sex' || id === 'person') {
-      // console.log({id, value})
       formattedValue = value
     }
 
@@ -72,14 +69,13 @@ const section2C1 = () => {
       ...formDataC1,
       [id]: formattedValue
     });
-    // console.log(formData)
 
     localStorage.setItem('formDataC1', JSON.stringify({
       ...formDataC1,
       [id]: formattedValue
     }));
   };
-
+  //Handles the changes occuring to the mailDataC1 and stores them in the localstorage
   const handleAddressChangeC1 = (e) => {
     const { id, value } = e.target;
     let formattedValue;
@@ -99,7 +95,7 @@ const section2C1 = () => {
       [id]: formattedValue
     }));
   }
-
+  //Handles the changes occuring to the residenceDataC1 and stores them in the localstorage
   const handleResidenceAddressChangeC1 = (e) => {
     const { id, value } = e.target;
     let formattedValue;
@@ -158,7 +154,7 @@ const section2C1 = () => {
       postalCode: ''
     });
   };
-
+  //use to copy the section-1 mailing details on checking the checkbox
   const handleCheckboxChangeM = (e) => {
     if (e.target.checked) {
       // Retrieve mailData from localStorage
@@ -192,7 +188,7 @@ const section2C1 = () => {
       localStorage.removeItem('mailDataC1');
     }
   };
-
+  //use to copy the section-1 mailing details on checking the checkbox
   const handleCheckboxChangeR = (e) => {
     if (e.target.checked) {
       // Get residenceData from localStorage
@@ -226,40 +222,10 @@ const section2C1 = () => {
   };
 
 
-  // const isRequiredFieldsFilledC2 = () => {
-  //   const formDataFields = Object.keys(formDataC1);
-  //   const mailDataFields = Object.keys(mailDataC1);
-  //   const residenceDataFields = Object.keys(residenceDataC1);
-
-  //   // Check if all required fields are filled in formDataC2
-  //   const requiredFormDataFields = formDataFields.filter(field => field !== 'middleName');
-  //   const missingFormDataFields = requiredFormDataFields.filter(field => !formDataC1[field]);
-
-  //   // Check if all required fields are filled in mailDataC2
-  //   const missingMailDataFields = mailDataFields.filter(field => !mailDataC1[field]);
-
-  //   // Check if all required fields are filled in residenceDataC2
-  //   const missingResidenceDataFields = residenceDataFields.filter(field => !residenceDataC1[field]);
-
-  //   // Return true if all required fields are filled in all data sets, else false
-  //   return missingFormDataFields.length === 0 && missingMailDataFields.length === 0 && missingResidenceDataFields.length === 0;
-  // };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // if (!isRequiredFieldsFilledC2()) {
-    //   alert("Please fill in all required fields except middleName for Patient 2");
-    //   return; // Stop navigation if any required field is missing
-    // }
-
-    // // All required fields are filled, navigate to the next section
-    // router.push("/section3");
-  }
-
   return (
     <section id="section-1" className="p-4">
       <div className='mx-24 mt-11'>
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className="grid grid-cols-1 md:grid-cols-3 md:gap-20 gap-10">
             <div className="relative h-10 w-full min-w-[200px]">
               <input
