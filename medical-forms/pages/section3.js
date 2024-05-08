@@ -3,7 +3,7 @@ import Section3 from '@/components/section3'
 import Navbar from '@/components/navbar'
 import Link from "next/link";
 
-export class section1 extends Component {
+export class section3 extends Component {
     render() {
         return (
             <main className="bg-neutral-50 min-h-screen">
@@ -22,4 +22,4 @@ export class section1 extends Component {
     }
 }
 
-export default section1
+export default section3

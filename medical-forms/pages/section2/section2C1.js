@@ -16,10 +16,10 @@ export class section2C1 extends Component {
                 </div>
                 <div className='flex flex-row gap-4 mt-4 mx-24'>
                     <div className='bg-black text-white font-semibold border rounded-lg px-3'>
-                        Child 1
+                        Patient 1
                     </div>
                     <div className='text-black font-semibold border rounded-lg px-3 hover:scale-110 transition-all ease-out'>
-                        <Link href="/section2/section2C2">Child 2</Link>
+                        <Link href="/section2/section2C2">Patient 2</Link>
                     </div>
                 </div>
                 <div>

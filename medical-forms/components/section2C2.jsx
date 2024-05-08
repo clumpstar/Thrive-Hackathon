@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { FaTrashAlt, FaArrowRight } from 'react-icons/fa'; // Import FontAwesome icons
@@ -220,17 +221,42 @@ const section2C2 = () => {
             localStorage.removeItem('residenceDataC2');
         }
     };
+    const router = useRouter();
 
+    // const isRequiredFieldsFilledC2 = () => {
+    //     const formDataFields = Object.keys(formDataC2);
+    //     const mailDataFields = Object.keys(mailDataC2);
+    //     const residenceDataFields = Object.keys(residenceDataC2);
+
+    //     // Check if all required fields are filled in formDataC2
+    //     const requiredFormDataFields = formDataFields.filter(field => field !== 'middleName');
+    //     const missingFormDataFields = requiredFormDataFields.filter(field => !formDataC2[field]);
+
+    //     // Check if all required fields are filled in mailDataC2
+    //     const missingMailDataFields = mailDataFields.filter(field => !mailDataC2[field]);
+
+    //     // Check if all required fields are filled in residenceDataC2
+    //     const missingResidenceDataFields = residenceDataFields.filter(field => !residenceDataC2[field]);
+
+    //     // Return true if all required fields are filled in all data sets, else false
+    //     return missingFormDataFields.length === 0 && missingMailDataFields.length === 0 && missingResidenceDataFields.length === 0;
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(residenceDataC2)
+        // if (!isRequiredFieldsFilledC2()) {
+        //     alert("Please fill in all required fields except middleName for Patient 2");
+        //     return; // Stop navigation if any required field is missing
+        // }
+
+        // // All required fields are filled, navigate to the next section
+        // router.push("/section3");
     }
 
     return (
         <section id="section-1" className="p-4">
             <div className='mx-24 mt-11'>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-3 md:gap-20 gap-10">
                         <div className="relative h-10 w-full min-w-[200px]">
                             <input
@@ -263,8 +289,8 @@ const section2C2 = () => {
                                 value={formDataC2.middleName}
                                 onChange={handleChangeC2}
                                 className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-gray-400 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
-                                placeholder=" " required /><label
-                                    className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-gray-900 before:border-blue-gray-200 peer-focus:before:!border-gray-900 after:border-blue-gray-200 peer-focus:after:!border-gray-900">Middle Name <span className="text-red-500">*</span>
+                                placeholder=" " /><label
+                                    className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-gray-900 before:border-blue-gray-200 peer-focus:before:!border-gray-900 after:border-blue-gray-200 peer-focus:after:!border-gray-900">Middle Name
                             </label>
                         </div>
 
@@ -290,6 +316,7 @@ const section2C2 = () => {
                                 id="sex"
                                 value={formDataC2.sex}
                                 onChange={handleChangeC2}
+                                required
                                 className="peer h-full w-full rounded-[7px] border border-gray-400 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline-none transition-all placeholder-shown:border placeholder-shown:border-gray-400 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-none disabled:border-0 disabled:bg-blue-gray-50 placeholder-opacity-0 focus:placeholder-opacity-100"
                             >
                                 <option value="">Select</option>
@@ -318,11 +345,12 @@ const section2C2 = () => {
                         </div>
 
                         <div className="relative">
-                            <h1 className="text-center">I am this person's</h1>
+                            <h1 className="text-center">I am this person's <span className='font-bold text-red-400'>*</span></h1>
                             <select
                                 id='person'
                                 value={formDataC2.person}
                                 onChange={handleChangeC2}
+                                required
                                 className="block w-full border border-gray-300 rounded-md py-2 px-4 mt-2 focus:outline-none focus:border-indigo-500"
                             >
                                 <option value="">Select</option>
@@ -484,7 +512,11 @@ const section2C2 = () => {
                                     </a>
                                 </div>
                                 <div className='text-center'>
-                                    <Link href="\section3" onSubmit={handleSubmit} className='border p-2 hover:bg-slate-400 text-black transition-all ease-in cursor-pointer rounded-md'>
+                                    {/* <button onSubmit={handleSubmit} className='border p-2 hover:bg-slate-400 text-black transition-all ease-in cursor-pointer rounded-md'>
+                                        <span className="hidden sm:inline-block">Next Section <FaArrowRight className="inline-block ml-1" /></span>
+                                        <span className="sm:hidden"><FaArrowRight className="inline-block ml-1" /></span>
+                                    </button> */}
+                                    <Link href="/section3" className='border p-2 hover:bg-slate-400 text-black transition-all ease-in cursor-pointer rounded-md'>
                                         <span className="hidden sm:inline-block">Next Section <FaArrowRight className="inline-block ml-1" /></span>
                                         <span className="sm:hidden"><FaArrowRight className="inline-block ml-1" /></span>
                                     </Link>

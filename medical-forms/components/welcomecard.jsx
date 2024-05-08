@@ -5,7 +5,7 @@ const welcomecard = () => {
   const instructions = [
     {
       title: `Welcome, User!`,
-      description: "Press the THRIVE filler at the top to return to the home page.",
+      description: "Press the BeWell filler at the top to return to the home page.",
       buttonLabel: null,
       buttonIcon: null
     },
